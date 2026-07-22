@@ -1,0 +1,30 @@
+# ===========================
+# Backend
+# ===========================
+event-management-backend/target/
+
+# SQLite database (optional)
+event-management-backend/src/main/resources/database/*.db
+
+# ===========================
+# Frontend
+# ===========================
+event-management-frontend/node_modules/
+event-management-frontend/dist/
+
+# ===========================
+# IDE
+# ===========================
+.vscode/
+.idea/
+
+# ===========================
+# OS
+# ===========================
+.DS_Store
+Thumbs.db
+
+# ===========================
+# Logs
+# ===========================
+*.log

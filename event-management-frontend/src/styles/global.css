@@ -1,0 +1,50 @@
+.dashboard {
+  padding: 40px 0;
+}
+
+.dashboard h1 {
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+.dashboard-text {
+  margin-bottom: 30px;
+  color: #64748b;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+
+.logout-btn {
+  margin-top: 30px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+}
+
+.logout-btn:hover {
+  background: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+}
