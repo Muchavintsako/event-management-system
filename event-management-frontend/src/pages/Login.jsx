@@ -1,9 +1,11 @@
 import { useState } from "react";
 import api from "../api/axios";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const [form, setForm] = useState({
     email: "",
@@ -27,6 +29,10 @@ export default function Login() {
     try {
       const res = await api.post("/auth/login", form);
       localStorage.setItem("token", res.data.data);
+      setUser({
+        email: form.email,
+        name: form.email.split('@')[0],
+      });
       navigate("/dashboard");
     } catch (err) {
       setMessage(err.response?.data?.message || "Login failed. Please try again.");

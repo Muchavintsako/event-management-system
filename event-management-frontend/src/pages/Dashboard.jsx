@@ -1,4 +1,9 @@
+import { useAuth } from '../context/AuthContext'
+
 export default function Dashboard() {
+  const { user } = useAuth()
+  const displayName = user?.name || user?.firstName || user?.fullName || 'there'
+
   return (
     <div
       style={{
@@ -19,7 +24,7 @@ export default function Dashboard() {
         }}
       >
         <div style={{ marginBottom: 32 }}>
-          <h1 style={{ margin: 0, fontSize: '2.5rem' }}>Welcome to your Dashboard</h1>
+          <h1 style={{ margin: 0, fontSize: '2.5rem' }}>Welcome back, {displayName}</h1>
           <p style={{ marginTop: 12, color: '#475569', maxWidth: 680 }}>
             Manage your events, tickets, and profile from one place. Your event summary and booking details are right here.
           </p>

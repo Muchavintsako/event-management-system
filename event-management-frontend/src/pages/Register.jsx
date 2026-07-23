@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import api from '../api/axios'
 
 export default function Register() {
@@ -13,6 +13,7 @@ export default function Register() {
   })
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handle = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -26,6 +27,7 @@ export default function Register() {
     try {
       const res = await api.post('/auth/register', form)
       setMessage(res.data.message || 'Registration successful. Check your email for OTP.')
+      navigate('/verify', { state: { email: form.email } })
     } catch (err) {
       setMessage(err.response?.data?.message || 'Registration failed. Please try again.')
     } finally {
