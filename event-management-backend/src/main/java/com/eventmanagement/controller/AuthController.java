@@ -2,6 +2,7 @@ package com.eventmanagement.controller;
 
 import com.eventmanagement.dto.request.LoginRequest;
 import com.eventmanagement.dto.request.RegisterRequest;
+import com.eventmanagement.dto.request.ResendOtpRequest;
 import com.eventmanagement.dto.request.VerifyOtpRequest;
 import com.eventmanagement.dto.response.ApiResponse;
 import com.eventmanagement.service.UserService;
@@ -36,6 +37,14 @@ public class AuthController {
         System.out.println("=========== VERIFY OTP API HIT ===========");
 
         return userService.verifyOtp(request);
+    }
+
+    @PostMapping("/resend-otp")
+    public ApiResponse resendOtp(@Valid @RequestBody ResendOtpRequest request) {
+
+        System.out.println("=========== RESEND OTP API HIT ===========");
+
+        return userService.resendOtp(request);
     }
 
     @PostMapping("/login")

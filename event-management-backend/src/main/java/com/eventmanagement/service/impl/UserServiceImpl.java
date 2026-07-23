@@ -2,6 +2,7 @@ package com.eventmanagement.service.impl;
 
 import com.eventmanagement.dto.request.LoginRequest;
 import com.eventmanagement.dto.request.RegisterRequest;
+import com.eventmanagement.dto.request.ResendOtpRequest;
 import com.eventmanagement.dto.request.VerifyOtpRequest;
 import com.eventmanagement.dto.response.ApiResponse;
 import com.eventmanagement.entity.User;
@@ -118,6 +119,31 @@ public ApiResponse verifyOtp(VerifyOtpRequest request) {
 
     return new ApiResponse(true, "Account verified successfully");
 }
+
+   @Override
+   @Transactional
+   public ApiResponse resendOtp(ResendOtpRequest request) {
+
+       User user = userRepository.findByEmail(request.getEmail()).orElse(null);
+
+       if (user == null) {
+           return new ApiResponse(false, "User not found");
+       }
+
+       if (user.isVerified()) {
+           return new ApiResponse(false, "Account already verified");
+       }
+
+       String otp = otpGenerator.generateOtp();
+       user.setOtp(otp);
+       user.setOtpExpiry(LocalDateTime.now().plusMinutes(5));
+
+       userRepository.save(user);
+
+       System.out.println("Resent OTP: " + otp);
+
+       return new ApiResponse(true, "A new OTP has been generated.");
+   }
 
    @Override
 public ApiResponse login(LoginRequest request) {
